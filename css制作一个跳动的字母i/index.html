@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css制作一个跳动的字母i</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    .loader {
+      width: 8em;
+      height: 13em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+    }
+
+    .loader::before {
+      content: '';
+      width: 5em;
+      height: 5em;
+      background-color: orangered;
+      border-radius: 50%;
+      animation: ball-jumping 1s ease-in-out infinite;
+    }
+
+    .loader::after {
+      content: '';
+      width: 5em;
+      height: 8em;
+      background-color: orange;
+      border-radius: 0.5em;
+      animation: rect-rotating 1s ease-in-out infinite;
+    }
+
+    @keyframes rect-rotating {
+      50% {
+        transform: rotate(90deg);
+      }
+      100% {
+        transform: rotate(180deg);
+      }
+    }
+
+    @keyframes ball-jumping {
+      20%,
+      80% {
+        transform: translateY(-2em);
+      }
+
+      50% {
+        transform: translateY(calc((8em -5em) / 4));
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader"></div>
+</body>
+
+</html>

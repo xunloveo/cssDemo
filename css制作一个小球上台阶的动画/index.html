@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css制作一个小球上台阶的动画</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+    }
+
+    .loader {
+      width: 7em;
+      height: 5em;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      font-size: 40px;
+      position: relative;
+    }
+
+    .loader span {
+      width: 1em;
+      height: 1em;
+      background-color: white;
+    }
+
+    .loader span {
+      height: calc(var(--n) * 1em);
+    }
+
+    .loader span:nth-child(1) {
+      --n: 1;
+    }
+
+    .loader span:nth-child(2) {
+      --n: 2;
+    }
+
+    .loader span:nth-child(3) {
+      --n: 3;
+    }
+
+    .loader span:nth-child(4) {
+      --n: 4;
+    }
+
+    .loader span:nth-child(5) {
+      --n: 5;
+    }
+
+    .loader span {
+      animation: sort 5s infinite;
+    }
+
+    .loader::before,
+    .loader::after {
+      content: '';
+      position: absolute;
+      width: 1em;
+      height: 1em;
+      background-color: white;
+      border-radius: 50%;
+      bottom: 1em;
+    }
+
+    .loader::before {
+      left: 0;
+      --direction: 1;
+    }
+
+    .loader::after {
+      left: 6em;
+      --direction: -1;
+    }
+
+    .loader::before,
+    .loader::after {
+      animation: climbling 5s infinite;
+      visibility: hidden;
+    }
+
+    .loader::after {
+      animation-delay: 2.5s;
+    }
+
+    @keyframes sort {
+      0%,
+      40%,
+      100% {
+        height: calc(var(--n) * 1em);
+      }
+
+      50%,
+      90% {
+        height: calc(5em - (var(--n) - 1) * 1em);
+      }
+    }
+
+    @keyframes climbling {
+      0% {
+        bottom: 1em;
+        left: calc(3em - 2*1.5em * var(--direction));
+        visibility: visible;
+      }
+      10% {
+        bottom: 2em;
+        left: calc(3em - 1 * 1.5em * var(--direction));
+      }
+      20% {
+        bottom: 3em;
+        left: calc(3em - 0 * 1.5em * var(--direction));
+      }
+      30% {
+        bottom: 4em;
+        left: calc(3em + 1* 1.5em * var(--direction));
+      }
+      40% {
+        bottom: 5em;
+        left: calc(3em + 2* 1.5em * var(--direction));
+      }
+      50% {
+        bottom: 1em;
+        left: calc(3em + 2 * 1.5em * var(--direction));
+      }
+      50%,
+      100% {
+        visibility: hidden;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loader">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</body>
+
+</html>
