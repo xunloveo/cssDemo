@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试闭包函数</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    /*var appendDiv = function () {
+                  for (var i = 0; i < 100; i++) {
+                    var div = document.createElement('div');
+                    div.innerHTML = i;
+                    document.body.appendChild(div);
+                    div.style.display = 'none';
+                  }
+                }
+
+                appendDiv();*/
+
+    // 采用回调函数的形式
+    var appendDiv = function (callBack) {
+      for (var i = 0; i < 100; i++) {
+        var div = document.createElement('div');
+        div.innerHTML = i;
+        document.body.appendChild(div);
+        if (typeof callBack === 'function') {
+          callBack(div);
+        }
+      }
+    }
+
+    appendDiv(function (node) {
+      node.style.display = 'none';
+    })
+  </script>
+</body>
+
+</html>

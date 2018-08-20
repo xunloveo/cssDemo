@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css制作闪闪发光的霓虹灯效果</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+    }
+
+    .text {
+      background-color: #000;
+      color: white;
+      font-size: 180px;
+      font-weight: 700;
+      font-family: sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* 用伪元素和数据属性增加文字 */
+
+    .text::before {
+      content: attr(data-text);
+      position: absolute;
+      color: white;
+      filter: blur(0.02em);
+    }
+
+    /* 用混合色产生描边效果 */
+
+    .text::before {
+      mix-blend-mode: difference;
+    }
+
+    /* 设置渐变色背景 */
+
+    .neon {
+      position: relative;
+    }
+
+    .gradient {
+      position: absolute;
+      background: linear-gradient(45deg, red, gold, lightgreen, gold, red);
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    /* 用混色模式把背景作用到文字上 */
+
+    .gradient {
+      mix-blend-mode: multiply;
+    }
+
+    /* 用径向渐变制作光影背景 */
+
+    .spotlight {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: radial-gradient(circle, white, transparent 25%) center / 25% 25%,
+      radial-gradient(circle, white, black 25%) center / 12.5% 12.5%;
+    }
+
+    /* 设置光影移动的动画效果 */
+
+    .neon {
+      overflow: hidden;
+    }
+
+    .spotlight {
+      top: -100%;
+      left: -100%;
+      animation: light 5s linear infinite;
+    }
+
+    @keyframes light {
+      to {
+        transform: translate(50%, 50%)
+      }
+    }
+
+    /* 用混合模式把光影用到渐变背景上 */
+
+    .spotlight {
+      mix-blend-mode: color-dodge;
+    }
+
+    /* 调节亮度是文字不能被选中 */
+
+    .neon {
+      filter: brightness(200%);
+    }
+
+    .text {
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 容器内定义三个元素分别代表文本，渐变背景，光影 -->
+  <div class="neon">
+    <span class="text" data-text='thanks'>thanks</span>
+    <span class='gradient'></span>
+    <span class="spotlight"></span>
+  </div>
+</body>
+
+</html>
